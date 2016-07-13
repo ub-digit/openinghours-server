@@ -6,6 +6,7 @@ class OpeningHour < ActiveRecord::Base
   serialize :closing_time, Tod::TimeOfDay
 
   belongs_to :rule
+  has_one :library, through: :rule
 
   validates_presence_of :rule
   validates_inclusion_of :closed, in: [true, false]

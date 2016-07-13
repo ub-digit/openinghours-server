@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   jsonapi_resources :libraries
   jsonapi_resources :rules
   jsonapi_resources :opening_hours
+  jsonapi_resources :active_opening_hours
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

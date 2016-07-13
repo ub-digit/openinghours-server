@@ -17,4 +17,15 @@ class Rule < ActiveRecord::Base
       errors.add(:enddate, "cannot be before start date")
     end
   end
+
+  def opening_hours_for_date(date:)
+
+    date_obj = Date.parse(date)
+    day_index = date_obj.strftime("%u").to_i - 1
+
+    opening_hours = self.opening_hours.where(day_of_week_index: day_index)
+
+    return opening_hours.first
+
+  end
 end

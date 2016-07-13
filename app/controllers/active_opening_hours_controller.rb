@@ -1,0 +1,1 @@
+class ActiveOpeningHoursController < JSONAPI::ResourceController

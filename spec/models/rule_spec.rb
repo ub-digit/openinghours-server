@@ -29,4 +29,27 @@ RSpec.describe Rule, type: :model do
   describe "opening_hours" do
     it {should have_many(:opening_hours)}
   end
+  describe "opening_hours_for_date" do
+    context "there are no opening hours for the given date" do
+      it "should return nil" do
+        rule = create(:rule, ruletype: "REGULAR", startdate: "2016-06-01")
+        opening_hour = create(:opening_hour, rule: rule, day_of_week_index: 0)
+
+        result = rule.opening_hours_for_date(date: "2016-07-12")
+
+        expect(result).to be nil
+      end
+    end
+    context "there are opening hours for the given date" do
+      it "should return an opening hour object" do
+        rule = create(:rule, ruletype: "REGULAR", startdate: "2016-06-01")
+        opening_hour = create(:opening_hour, rule: rule, day_of_week_index: 0)
+
+        result = rule.opening_hours_for_date(date: "2016-07-11")
+
+        expect(result).to be_a OpeningHour
+        expect(result.id).to eq opening_hour.id
+      end
+    end
+  end
 end

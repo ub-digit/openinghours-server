@@ -1,4 +1,7 @@
-class OpeningHourResource < JSONAPI::Resource
+class ActiveOpeningHourResource < JSONAPI::Resource
+
+  model_name 'OpeningHour'
+
   attributes :day_of_week_index, :closed, :opening_time, :closing_time
 
   filter :library, apply: ->(records, value, _options) {
@@ -19,10 +22,8 @@ class OpeningHourResource < JSONAPI::Resource
     return records
   }
 
-
   has_one :rule
   #has_one :library, relation_name: :library
-
 
   def opening_time
     return @model.opening_time.to_s.present? ? @model.opening_time.strftime("%H:%M") : nil
